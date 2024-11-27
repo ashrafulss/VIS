@@ -1,0 +1,25 @@
+
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="" alt="Logo" />
+      <span>VAT Accounting System</span>
+    </div>
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a routerLink="dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+        <li><a routerLink="monitoring" routerLinkActive="active-link">Monitoring</a></li>
+        <li><a routerLink="analysis" routerLinkActive="active-link">Analysis</a></li>
+        <li><a routerLink="mushaks" routerLinkActive="active-link">Mushak</a></li>
+        <li><a routerLink="vat-office" routerLinkActive="active-link">VAT Office</a></li>
+      </ul>
+    </div>
+    <div class="profile">
+      <span>Sarah Noor</span>
+      <img src="" alt="Profile Picture" />
+    </div>
+  </nav>
+
+</body>
+
+<router-outlet></router-outlet>
