@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="accordion" id="commissionerateList">
+    <div class="accordion-item" *ngFor="let commissioner of commissioners; let i = index">
+      <h2 class="accordion-header" [id]="'heading' + commissioner.id">
+        <button 
+          class="accordion-button" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          [attr.data-bs-target]="'#collapse' + commissioner.id"
+          [attr.aria-controls]="'collapse' + commissioner.id"
+          [attr.aria-expanded]="i === 0 ? 'true' : 'false'"
+        >
+          {{ commissioner.name }}
+        </button>
+      </h2>
+
+      <div 
+        [id]="'collapse' + commissioner.id" 
+        class="accordion-collapse collapse" 
+        [ngClass]="{ 'show': i === 0 }"
+        [attr.aria-labelledby]="'heading' + commissioner.id"
+        data-bs-parent="#commissionerateList"
+      >
+        <div class="accordion-body">
+          <!-- Use the division component to display divisions for each commissioner -->
+          <app-division [divisions]="commissioner.division"></app-division>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
