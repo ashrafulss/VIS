@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DivisionComponent } from './division.component';
+import { AllExpandComponent } from './all-expand.component';
 
-describe('DivisionComponent', () => {
-  let component: DivisionComponent;
-  let fixture: ComponentFixture<DivisionComponent>;
+describe('AllExpandComponent', () => {
+  let component: AllExpandComponent;
+  let fixture: ComponentFixture<AllExpandComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DivisionComponent]
+      declarations: [AllExpandComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DivisionComponent);
+    fixture = TestBed.createComponent(AllExpandComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

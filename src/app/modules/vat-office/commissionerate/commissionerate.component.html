@@ -1,31 +1,264 @@
-<div class="container mt-5">
-  <div class="accordion" id="commissionerateList">
-    <div class="accordion-item" *ngFor="let commissioner of commissioners; let i = index">
-      <h2 class="accordion-header" [id]="'heading' + commissioner.id">
-        <button 
-          class="accordion-button" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          [attr.data-bs-target]="'#collapse' + commissioner.id"
-          [attr.aria-controls]="'collapse' + commissioner.id"
-          [attr.aria-expanded]="i === 0 ? 'true' : 'false'"
-        >
-          {{ commissioner.name }}
-        </button>
-      </h2>
 
-      <div 
-        [id]="'collapse' + commissioner.id" 
-        class="accordion-collapse collapse" 
-        [ngClass]="{ 'show': i === 0 }"
-        [attr.aria-labelledby]="'heading' + commissioner.id"
-        data-bs-parent="#commissionerateList"
-      >
+
+
+
+
+
+
+<div class="row pt-5">
+
+  <div class="d-flex">
+
+    <div class="p-2 d-flex align-items-center">
+      <h3 class="mb-0">Vate Office</h3>
+      <!-- <i class="bi bi-chevron-right" style="padding-left: 10px;"></i> -->
+    </div>
+
+
+    <!-- <div class="p-2 d-flex align-items-center">
+      <h3 class="mb-0">Division</h3>
+      <i class="bi bi-chevron-right" style="padding-left: 10px;"></i>
+    </div>
+    <div class="p-2 d-flex align-items-center">
+      <h3 class="mb-0">Circle</h3>
+      <i class="bi bi-chevron-right" style="padding-left: 10px;"></i>
+    </div>
+    <div class="p-2 d-flex align-items-center">
+      <h3 class="mb-0">Tax Payer</h3>
+      <i class="bi bi-chevron-right" style="padding-left: 10px;"></i>
+    </div>
+    <div class="p-2 ms-auto d-flex align-items-center">
+      <button type="button" class="btn btn-success" routerLink="alldata" >Expand All 
+       
+        <i style="padding-left: 10px;" class="bi bi-arrows-fullscreen"></i>
+    </button>
+    </div>  -->
+  </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="row pt-4">
+  <div class="accordion" id="commissionerateList" style="height: 500px; overflow-y: auto;">
+    <!-- Commissioner Row -->
+    <div class="accordion-item" *ngFor="let commissioner of commissioners" style="border-radius: 20px; margin-bottom: 20px;">
+      <p class="accordion-header" [id]="'heading' + commissioner.id">
+        <button
+          style="background-color: #FFFFFF; display: flex; align-items: center; border-radius: 20px; padding: 10px;"
+          class="accordion-button" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapseCommissioner' + commissioner.id"
+          [attr.aria-controls]="'collapseCommissioner' + commissioner.id">
+          <div>
+            <p>Code : {{ commissioner.id }}</p>
+            <p style="font-size: 18px; font-weight: bold;">{{ commissioner.name }}</p>
+          </div>
+        </button>
+      </p>
+
+      <!-- Commissioner Body -->
+      <div [id]="'collapseCommissioner' + commissioner.id" class="accordion-collapse collapse">
         <div class="accordion-body">
-          <!-- Use the division component to display divisions for each commissioner -->
-          <app-division [divisions]="commissioner.division"></app-division>
+          <!-- Division Row -->
+          <div class="accordion" [id]="'divisionList' + commissioner.id">
+            <div class="row">
+              <!-- Timeline Dot and Line for Division -->
+              
+              
+
+              <div class="col-1 position-relative">
+                <!-- Conditional Line -->
+                <div *ngIf="shouldShowLine(commissioner.division.length)" class="timeline-line"></div>
+                
+                <!-- Dots for Divisions -->
+                <div *ngFor="let division of commissioner.division; let i = index" class="timeline-dot"
+                  [style.top]="getDotPosition(i, commissioner.division.length)"></div>
+              </div>
+              
+
+              <div class="col-11">
+                <div class="accordion-item" *ngFor="let division of commissioner.division" style="border-radius: 20px; margin-bottom: 20px;">
+                  <!-- Division Content -->
+                  <p class="accordion-header" [id]="'headingDivision' + division.id">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#collapseDivision' + division.id"
+                      [attr.aria-controls]="'collapseDivision' + division.id">
+                      <p>Code : {{ division.id }}</p>
+                      <p >{{ division.name }}</p>
+                    </button>
+                  </p>
+
+                  <!-- Division Body -->
+                  <div [id]="'collapseDivision' + division.id" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                      <!-- Circle Row -->
+                      <div class="accordion" [id]="'circleList' + division.id">
+                        <div class="row">
+                          <!-- Timeline Dot and Line for Circle -->
+                         
+                         
+                          <div class="col-1 position-relative " style="padding-top:30px;">
+                            <!-- Conditional Line -->
+                            <div *ngIf="shouldShowLine(division.circle.length)" class="timeline-line"></div>
+                            
+                            <!-- Dots for Circles -->
+                            <div *ngFor="let circle of division.circle; let i = index" class="timeline-dot"
+                              [style.top]="getDotPosition(i, division.circle.length)"></div>
+                          </div>
+                          
+                          <!-- Circle Content -->
+                          <div class="col-11">
+                            <div class="accordion-item" *ngFor="let circle of division.circle">
+                              <p class="accordion-header" [id]="'headingCircle' + circle.id">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                  [attr.data-bs-target]="'#collapseCircle' + circle.id"
+                                  [attr.aria-controls]="'collapseCircle' + circle.id">
+                                  <p>Code : {{ circle.id }}</p>
+                                  <p style="font-size: 18px; font-weight: bold;">{{ circle.name }}</p>
+                                </button>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div> <!-- End Circle Row -->
+                    </div>
+                  </div> <!-- End Division Body -->
+                </div>
+              </div>
+
+            </div> <!-- End Division Row -->
+          </div>
         </div>
-      </div>
+      </div> <!-- End Commissioner Body -->
     </div>
   </div>
 </div>
+
+
+
+
+
+<!-- ------------------------------------------------------------ -->
+
+
+
+
+<!-- 
+<div class="row pt-4">
+
+
+  <div class="accordion" id="commissionerateList" style=" height: 500px; overflow-y: auto;" >
+    <div class="accordion-item" *ngFor="let commissioner of commissioners" style="border-radius: 20px; margin-bottom: 20px;">
+    
+      <p class="accordion-header" [id]="'heading' + commissioner.id">
+        <button style="background-color:  #FFFFFF; display: flex; align-items: center; border-radius: 20px; padding-top: 10px; padding-bottom: 10px;" class="accordion-button" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapseCommissioner' + commissioner.id"
+          [attr.aria-controls]="'collapseCommissioner' + commissioner.id" [attr.aria-expanded]="'false'">
+         
+          <div class="border-custom">
+            <p>Code : {{ commissioner.id }} </p>
+          </div>
+          
+
+          <div class="border-cus">
+          <p style="font-size: 18px; font-weight: bold;">{{ commissioner.name }} :</p>
+          <p style="padding-left: 20px; font-size: 18px;">{{ commissioner.description }}</p>
+        </div>
+        
+         
+        </button>
+      </p>
+
+   
+      <div [id]="'collapseCommissioner' + commissioner.id" class="accordion-collapse collapse"
+        [attr.aria-labelledby]="'heading' + commissioner.id" [attr.data-bs-parent]="'#commissionerateList'">
+
+        <div class="accordion-body">
+          <div class="accordion" [id]="'divisionList' + commissioner.id">
+      
+            <div class="accordion-item" *ngFor="let division of commissioner.division" style="border-radius: 20px; margin-bottom: 20px;">
+              <p class="accordion-header" [id]="'headingDivision' + division.id">
+                
+                <button (click)="toggleCollapse(division.id)" style="background-color:  #FFFFFF; display: flex; align-items: center; border-radius: 20px; padding-top: 10px; padding-bottom: 10px;"  class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#collapseDivision' + division.id"
+                  [attr.aria-controls]="'collapseDivision' + division.id" [attr.aria-expanded]="'false'">
+
+                 
+                  <div class="border-custom">
+                    <p>Code : {{ division.id }} </p>
+                  </div>
+
+                  <div class="border-cus">  <p style="font-size: 18px; font-weight: bold;">    {{ division.name }}</p></div>
+             
+
+
+                  <div *ngIf="isExpanded(division.id)"  class="border-customs">
+                    <a routerLink="/dashboard" style="font-size: 30px; text-decoration: none; padding-left: 20px; padding-right: 20px; font-size: 18px; font-weight: bold; color: black;"> + Add Circle </a>
+                  </div>
+
+                </button>
+              </p>
+
+              <div [id]="'collapseDivision' + division.id" class="accordion-collapse collapse"
+                [attr.aria-labelledby]="'headingDivision' + division.id"
+                [attr.data-bs-parent]="'#divisionList' + commissioner.id">
+
+                <div class="accordion-body">
+                 
+                  <div class="accordion" [id]="'circleList' + division.id">
+                    <div class="accordion-item" *ngFor="let circle of division.circle" style="border-radius: 20px;">
+                      <h2 class="accordion-header" [id]="'headingCircle' + circle.id">
+                        <button style="background-color:  #FFFFFF; display: flex; align-items: center; border-radius: 20px; padding-top: 10px; padding-bottom: 10px;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          [attr.data-bs-target]="'#collapseCircle' + circle.id"
+                          [attr.aria-controls]="'collapseCircle' + circle.id" [attr.aria-expanded]="'false'">
+                         
+                          <div class="border-custom" >
+                            <p>Code : {{ circle.id }} </p>
+                          </div>
+
+                          <div class="border-cus">
+                            <p style="font-size: 18px; font-weight: bold;">{{ circle.name }}</p>
+                          </div>
+
+                          
+
+                          
+                        </button>
+                      </h2>
+
+                  
+                      <div [id]="'collapseCircle' + circle.id" class="accordion-collapse collapse"
+                        [attr.aria-labelledby]="'headingCircle' + circle.id"
+                        [attr.data-bs-parent]="'#circleList' + division.id">
+
+                        <div class="accordion-body">
+                          
+                          <ul>
+                            <li *ngFor="let taxpayer of circle.taxpayer">
+                              {{ taxpayer.name }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+ -->

@@ -1,0 +1,113 @@
+
+
+
+  .border-custom {
+    color: #89354C;
+    border: 2px solid rgba(0, 0, 0, 0.222);
+    border-radius: 10px;
+    margin-right: 15px;
+    font-size: 18px;
+    align-items: center;
+
+
+
+
+    display: flex;          /* Use Flexbox for alignment */
+    align-items: center;    /* Center content vertically */
+    justify-content: center;
+    
+    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+   
+  }
+
+
+  .border-custom p {
+    margin: 0;              /* Remove the default margin */
+  }
+
+  .border-cus{
+    display: flex;
+  }
+
+  .border-cus p{
+    margin: 0;
+  }
+
+  .border-customs {
+    color: #89354C;
+    border: 2px solid rgba(0, 0, 0, 0.222);
+    border-radius: 10px;
+    margin-left: 1200px;
+
+    font-size: 18px;
+    text-decoration: none;
+
+    
+  }
+  
+  
+
+  @media (max-width: 1200px) {
+    .border-customs {
+      margin-left: 200px; /* Less margin for smaller screens */
+
+    }
+  }
+  
+  
+  /* Responsive adjustments for medium screens */
+  @media (max-width: 768px) {
+    .border-customs {
+      margin-left: 200px; /* Less margin for smaller screens */
+
+    }
+  }
+  
+  /* Responsive adjustments for small screens (mobile) */
+  @media (max-width: 480px) {
+    .border-customs {
+      margin-left: 100px; /* Even less margin for small screens */
+   
+    }
+  }
+  
+
+  
+
+
+
+
+
+  
+
+
+  /* Timeline Vertical Line */
+.timeline-line {
+  position: absolute;
+  width: 3px;
+  background-color: #ccc;
+  height: 100%; /* Full height of the container */
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 0; /* Behind dots */
+
+}
+
+/* Timeline Dot */
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #C9C9C9;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1; /* Above the line */
+}
+
+
+  
+  

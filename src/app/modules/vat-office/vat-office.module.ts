@@ -4,18 +4,15 @@ import { CommonModule } from '@angular/common';
 import { VatOfficeRoutingModule } from './vat-office-routing.module';
 import { VatOfficeComponent } from './vat-office/vat-office.component';
 import { CommissionerateComponent } from './commissionerate/commissionerate.component';
-import { DivisionComponent } from './division/division.component';
-import { CircleComponent } from './circle/circle.component';
-import { TaxPayerComponent } from './tax-payer/tax-payer.component';
+import { AllExpandComponent } from './all-expand/all-expand.component';
+
 
 
 @NgModule({
   declarations: [
     VatOfficeComponent,
     CommissionerateComponent,
-    DivisionComponent,
-    CircleComponent,
-    TaxPayerComponent
+    AllExpandComponent
   ],
   imports: [
     CommonModule,
